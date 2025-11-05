@@ -64,6 +64,39 @@
         .btn:hover {
             background: #fdcb6e;
         }
+        .carousel {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-item {
+            min-width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls button {
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
         .products {
             padding: 50px 20px;
             text-align: center;
@@ -79,6 +112,67 @@
             padding: 20px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
+        }
+        .testimonials {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .testimonial-carousel {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .testimonial-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .testimonial-item {
+            min-width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            min-height: 150px; /* Adicionado para consistência de altura */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .testimonial-item p {
+            font-style: italic;
+            margin: 0 0 10px 0;
+        }
+        .testimonial-item cite {
+            font-weight: bold;
+            align-self: flex-end;
+        }
+        .testimonial-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10; /* Garantir que os botões fiquem acima */
+            pointer-events: none; /* Para não interferir no clique */
+        }
+        .testimonial-controls button {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 15px 20px; /* Aumentado para melhor visibilidade */
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.2em;
+            pointer-events: auto; /* Reabilitar cliques nos botões */
+            transition: background 0.3s;
+        }
+        .testimonial-controls button:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .location {
+            padding: 50px 20px;
+            text-align: center;
         }
         .contact {
             padding: 50px 20px;
@@ -102,19 +196,13 @@
         }
         .bubble {
             position: absolute;
-            bottom: -100px;
             width: 20px;
             height: 20px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             animation: float 6s infinite ease-in-out;
             pointer-events: none;
-        }
-        .bubble:nth-child(odd) {
-            animation-delay: -2s;
-        }
-        .bubble:nth-child(even) {
-            animation-delay: -4s;
+            z-index: -1;
         }
         @keyframes float {
             0% {
@@ -137,7 +225,10 @@
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
+                <li><a href="#gallery">Galeria</a></li>
                 <li><a href="#products">Produtos</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
+                <li><a href="#location">Localização</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
         </nav>
@@ -157,6 +248,21 @@
         <div class="bubble" style="left: 70%;"></div>
         <div class="bubble" style="left: 80%;"></div>
         <div class="bubble" style="left: 90%;"></div>
+    </section>
+
+    <section id="gallery" class="products">
+        <h2>Galeria de Patos</h2>
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop');"></div>
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=400&fit=crop');"></div>
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&h=400&fit=crop');"></div>
+            </div>
+            <div class="carousel-controls">
+                <button id="prev">&lt;</button>
+                <button id="next">&gt;</button>
+            </div>
+        </div>
     </section>
 
     <section id="products" class="products">
@@ -181,6 +287,41 @@
         </div>
     </section>
 
+    <section id="testimonials" class="testimonials">
+        <h2>Depoimentos de Clientes</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial-inner">
+                <div class="testimonial-item">
+                    <p>"Adorei o pato unicórnio! Minha filha não para de brincar com ele na banheira."</p>
+                    <cite>- Maria Silva</cite>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Produtos de alta qualidade e entrega rápida. Recomendo a CorkDuckStore!"</p>
+                    <cite>- João Pereira</cite>
+                </div>
+                <div class="testimonial-item">
+                    <p>"O pato pirata trouxe muita diversão para nossas férias em família."</p>
+                    <cite>- Ana Costa</cite>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button id="prev-test">&lt;</button>
+                <button id="next-test">&gt;</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="location">
+        <h2>Nossa Localização</h2>
+        <p>Visite-nos em nossa loja física!</p>
+        <address>
+            Rua dos Patos, 123<br>
+            Cidade das Águas, Brasil<br>
+            CEP: 12345-678
+        </address>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.097!2d-46.654!3d-23.550!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sS%C3%A3o%20Paulo%2C%20SP!5e0!3m2!1sen!2sbr!4v1690000000000!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
     <section id="contact" class="contact">
         <h2>Entre em Contato</h2>
         <p>Envie-nos uma mensagem com suas dúvidas ou pedidos especiais!</p>
@@ -193,15 +334,71 @@
     </section>
 
     <script>
-        // Adicionar mais bolhas dinamicamente ao rolar ou mover o mouse
+        // Carrossel de imagens
+        let currentIndex = 0;
+        const carouselInner = document.querySelector('.carousel-inner');
+        const totalItems = document.querySelectorAll('.carousel-item').length;
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarousel();
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            updateCarousel();
+        });
+
+        function updateCarousel() {
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Carrossel de depoimentos
+        let currentTestIndex = 0;
+        const testimonialInner = document.querySelector('.testimonial-inner');
+        const totalTestItems = document.querySelectorAll('.testimonial-item').length;
+
+        document.getElementById('next-test').addEventListener('click', () => {
+            currentTestIndex = (currentTestIndex + 1) % totalTestItems;
+            updateTestimonial();
+        });
+
+        document.getElementById('prev-test').addEventListener('click', () => {
+            currentTestIndex = (currentTestIndex - 1 + totalTestItems) % totalTestItems;
+            updateTestimonial();
+        });
+
+        function updateTestimonial() {
+            testimonialInner.style.transform = `translateX(-${currentTestIndex * 100}%)`;
+        }
+
+        // Bolhas dinâmicas com precisão aprimorada
+        let lastBubbleTime = 0;
+        const bubbleInterval = 50; // Cria bolhas a cada 50ms para suavidade
+        const maxBubbles = 50; // Limite de bolhas simultâneas para performance
+        let bubbleCount = 0;
+
         document.addEventListener('mousemove', function(e) {
+            const now = Date.now();
+            if (now - lastBubbleTime < bubbleInterval) return;
+            lastBubbleTime = now;
+
+            if (bubbleCount >= maxBubbles) return;
+
             const bubble = document.createElement('div');
             bubble.className = 'bubble';
-            bubble.style.left = e.clientX + 'px';
-            bubble.style.top = e.clientY + 'px';
+            bubble.style.left = (e.clientX + (Math.random() - 0.5) * 20) + 'px'; // Variação leve para naturalidade
+            bubble.style.top = (e.clientY + (Math.random() - 0.5) * 20) + 'px';
+            const size = Math.random() * 20 + 10; // Tamanho aleatório entre 10-30px
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.animationDuration = (Math.random() * 2 + 4) + 's'; // Duração aleatória 4-6s
             document.body.appendChild(bubble);
+            bubbleCount++;
+
             setTimeout(() => {
                 bubble.remove();
+                bubbleCount--;
             }, 6000);
         });
     </script>
